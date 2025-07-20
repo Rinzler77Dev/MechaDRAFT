@@ -47,6 +47,7 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   // Sample data
   const maps = ['City Ruins', 'Frozen Tundra', 'Desert Outpost', 'Skyport', 'Lava Pit'];
   const strikers = ['Blaze', 'Frost', 'Shock', 'Vortex', 'Titan'];
@@ -63,78 +64,4 @@
   const draftSummaryEl = document.getElementById('draft-summary');
   const pickMapBtn = document.getElementById('pick-map-btn');
   const banMapBtn = document.getElementById('ban-map-btn');
-  const banStrikerBtn = document.getElementById('ban-striker-btn');
-
-  function renderMaps() {
-    mapsListEl.innerHTML = '';
-    maps.forEach(map => {
-      const div = document.createElement('div');
-      div.className = 'item';
-      if (pickedMaps.includes(map)) div.classList.add('picked');
-      if (bannedMaps.includes(map)) div.classList.add('banned');
-      div.textContent = map;
-      div.onclick = () => {
-        if (!mode) return alert('Select an action: Pick Map or Ban Map');
-        if (mode === 'pick-map') {
-          if (bannedMaps.includes(map)) return alert('Map is banned!');
-          if (!pickedMaps.includes(map)) {
-            pickedMaps.push(map);
-          } else {
-            pickedMaps = pickedMaps.filter(m => m !== map);
-          }
-        } else if (mode === 'ban-map') {
-          if (pickedMaps.includes(map)) return alert('Map is picked!');
-          if (!bannedMaps.includes(map)) {
-            bannedMaps.push(map);
-          } else {
-            bannedMaps = bannedMaps.filter(m => m !== map);
-          }
-        }
-        updateSummary();
-        renderMaps();
-      };
-      mapsListEl.appendChild(div);
-    });
-  }
-
-  function renderStrikers() {
-    strikersListEl.innerHTML = '';
-    strikers.forEach(striker => {
-      const div = document.createElement('div');
-      div.className = 'item';
-      if (bannedStrikers.includes(striker)) div.classList.add('banned');
-      div.textContent = striker;
-      div.onclick = () => {
-        if (mode !== 'ban-striker') return alert('Select "Ban Striker" to ban.');
-        if (!bannedStrikers.includes(striker)) {
-          bannedStrikers.push(striker);
-        } else {
-          bannedStrikers = bannedStrikers.filter(s => s !== striker);
-        }
-        updateSummary();
-        renderStrikers();
-      };
-      strikersListEl.appendChild(div);
-    });
-  }
-
-  function updateSummary() {
-    draftSummaryEl.innerHTML = `
-      <p><strong>Picked Maps:</strong> ${pickedMaps.length ? pickedMaps.join(', ') : 'None'}</p>
-      <p><strong>Banned Maps:</strong> ${bannedMaps.length ? bannedMaps.join(', ') : 'None'}</p>
-      <p><strong>Banned Strikers:</strong> ${bannedStrikers.length ? bannedStrikers.join(', ') : 'None'}</p>
-    `;
-  }
-
-  pickMapBtn.onclick = () => { mode = 'pick-map'; alert('Click maps to pick for your team'); };
-  banMapBtn.onclick = () => { mode = 'ban-map'; alert('Click maps to ban for opponent'); };
-  banStrikerBtn.onclick = () => { mode = 'ban-striker'; alert('Click strikers to ban'); };
-
-  // Initial render
-  renderMaps();
-  renderStrikers();
-  updateSummary();
-</script>
-
-</body>
-</html>
+  const banStrikerBtn = document.getEl
